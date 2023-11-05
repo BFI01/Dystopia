@@ -1,0 +1,6 @@
+name: Dystopia
+version: '${version}'
+main: me.bfi01.dystopia.Dystopia
+api-version: 1.20
+authors: [ BFI01 ]
+description: An ultra hardcore Minecraft plugin. Breaks the vanilla boundaries for a fresh horror experience.
