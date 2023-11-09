@@ -1,7 +1,8 @@
-package me.bfi01.dystopia.accounts;
+package me.bfi01.dystopia.listeners;
 
 import me.bfi01.dystopia.Dystopia;
-import me.bfi01.dystopia.util.DefaultListener;
+import me.bfi01.dystopia.accounts.Account;
+import me.bfi01.dystopia.managers.AccountManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -11,7 +12,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 
 /**
- * {@link Listener} to handle {@link DystopiaAccount}s on the server.
+ * {@link Listener} to handle {@link Account}s on the server.
  */
 public class AccountListener implements DefaultListener {
     private final Dystopia plugin;
@@ -40,6 +41,8 @@ public class AccountListener implements DefaultListener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         // Get the player's account (or create it if it does not exist)
+        accountManager.getAccount(player);
+
         plugin.getLogger().info("Account connected: " + player.getName() + " (" + player.getUniqueId() + ")");
         plugin.getLogger().info("Accounts connected: " + accountManager.getAccounts().size());
     }
@@ -53,6 +56,7 @@ public class AccountListener implements DefaultListener {
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         // Remove the account from the AccountManager
+        accountManager.removeAccount(player);
         plugin.getLogger().info("Account disconnected: " + player.getName() + " (" + player.getUniqueId() + ")");
         plugin.getLogger().info("Accounts connected: " + accountManager.getAccounts().size());
     }
